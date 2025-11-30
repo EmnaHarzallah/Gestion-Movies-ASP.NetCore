@@ -25,7 +25,8 @@
                 <thead class="table-dark">
                     <tr>
                         <th>
-                            <a href="@Url.Action("Index", "Genre", new { sortBy = "Name", sortOrder = Model.SortOrder == "asc" && Model.SortBy == "Name" ? "desc" : "asc" })">
+                            <a
+                                href="@Url.Action("Index", "Genre", new { sortBy = "Name", sortOrder = Model.SortOrder == "asc" && Model.SortBy == "Name" ? "desc" : "asc" })">
                                 Nom
                                 @if (Model.SortBy == "Name")
                                 {
@@ -44,8 +45,10 @@
                             <td>@genre.Name</td>
                             <td>@(genre.Movies?.Count ?? 0)</td>
                             <td class="text-center">
-                                <a href="@Url.Action("Edit", "Genre", new { id = genre.Id })" class="btn btn-sm btn-warning">Éditer</a>
-                                <a href="@Url.Action("Delete", "Genre", new { id = genre.Id })" class="btn btn-sm btn-danger">Supprimer</a>
+                                <a href="@Url.Action("Edit", "Genre", new { id = genre.Id })"
+                                    class="btn btn-sm btn-warning">Éditer</a>
+                                <a href="@Url.Action("Delete", "Genre", new { id = genre.Id })"
+                                    class="btn btn-sm btn-danger">Supprimer</a>
                             </td>
                         </tr>
                     }
@@ -67,15 +70,15 @@
     .table-hover tbody tr:hover {
         background-color: #f5f5f5;
     }
-    
+
     a {
         text-decoration: none;
     }
-    
+
     th a {
         color: white;
     }
-    
+
     th a:hover {
         color: #e0e0e0;
     }

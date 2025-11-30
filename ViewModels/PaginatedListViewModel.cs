@@ -1,6 +1,8 @@
 namespace AspCoreFirstApp.ViewModels
 {
     using AspCoreFirstApp.Helpers;
+    using System.Collections.Generic;
+
 
     public class PaginatedListViewModel<T>
     {
@@ -8,6 +10,7 @@ namespace AspCoreFirstApp.ViewModels
         public PaginationHelper Pagination { get; set; }
         public string SortBy { get; set; }
         public string SortOrder { get; set; }
+        public List<AspCoreFirstApp.Models.Genre> Genres { get; set; }
 
         public PaginatedListViewModel()
         {

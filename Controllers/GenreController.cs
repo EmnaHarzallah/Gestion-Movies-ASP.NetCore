@@ -1,10 +1,10 @@
 namespace AspCoreFirstApp.Controllers;
- 
- using Microsoft.AspNetCore.Mvc;
- using Microsoft.EntityFrameworkCore;
- using AspCoreFirstApp.Models;
- using AspCoreFirstApp.ViewModels;
- using AspCoreFirstApp.Helpers;
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using AspCoreFirstApp.Models;
+using AspCoreFirstApp.ViewModels;
+using AspCoreFirstApp.Helpers;
 
 public class GenreController : Controller
 {
@@ -110,5 +110,27 @@ public class GenreController : Controller
             _db.SaveChanges();
         }
         return RedirectToAction(nameof(Index));
+    }
+    public IActionResult SeedGenres()
+    {
+        var genres = new List<Genre>
+        {
+            new Genre { Name = "Action" },
+            new Genre { Name = "Comédie" },
+            new Genre { Name = "Drame" },
+            new Genre { Name = "Horreur" },
+            new Genre { Name = "Science-Fiction" },
+            new Genre { Name = "Romance" },
+            new Genre { Name = "Documentaire" },
+            new Genre { Name = "Thriller" },
+            new Genre { Name = "Animation" },
+            new Genre { Name = "Fantastique" }
+
+        };
+
+        _db.Genres.AddRange(genres);
+        _db.SaveChanges();
+
+        return Content("Genres ajoutés !");
     }
 }
