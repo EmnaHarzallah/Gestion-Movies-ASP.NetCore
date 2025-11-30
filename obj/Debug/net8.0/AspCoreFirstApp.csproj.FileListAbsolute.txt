@@ -251,3 +251,5 @@ C:\Users\ADMIN\AspCoreFirstApp\obj\Debug\net8.0\refint\AspCoreFirstApp.dll
 C:\Users\ADMIN\AspCoreFirstApp\obj\Debug\net8.0\AspCoreFirstApp.pdb
 C:\Users\ADMIN\AspCoreFirstApp\obj\Debug\net8.0\AspCoreFirstApp.genruntimeconfig.cache
 C:\Users\ADMIN\AspCoreFirstApp\obj\Debug\net8.0\ref\AspCoreFirstApp.dll
+C:\Users\ADMIN\AspCoreFirstApp\bin\Debug\net8.0\Data\Genre.json
+C:\Users\ADMIN\AspCoreFirstApp\bin\Debug\net8.0\Data\Movie.json

@@ -4,6 +4,7 @@ using AspCoreFirstApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspCoreFirstApp.Migrations
 {
     [DbContext(typeof(ApplicationdbContext))]
-    partial class ApplicationdbContextModelSnapshot : ModelSnapshot
+    [Migration("20251130214018_AddOnModelCreating")]
+    partial class AddOnModelCreating
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,63 +56,6 @@ namespace AspCoreFirstApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("a1b2c3d4-e5f6-4a11-98ef-2345abcd1111"),
-                            Name = "Action"
-                        },
-                        new
-                        {
-                            Id = new Guid("b234abcd-1234-46ff-8890-888899990000"),
-                            Name = "Science-Fiction"
-                        },
-                        new
-                        {
-                            Id = new Guid("c345bbbb-5678-45aa-9900-abcd12340000"),
-                            Name = "Drame"
-                        },
-                        new
-                        {
-                            Id = new Guid("d456cccc-1111-42bb-8899-aa00ff223344"),
-                            Name = "Crime"
-                        },
-                        new
-                        {
-                            Id = new Guid("e567dddd-2222-4c11-aabb-112233445566"),
-                            Name = "Super-Héros"
-                        },
-                        new
-                        {
-                            Id = new Guid("f678eeee-3333-4d22-bbcc-778899001122"),
-                            Name = "Historique"
-                        },
-                        new
-                        {
-                            Id = new Guid("aa789fff-4444-4e33-ccdd-998877665544"),
-                            Name = "Romance"
-                        },
-                        new
-                        {
-                            Id = new Guid("bb90aaaa-5555-4f44-ddaa-aabbccddeeff"),
-                            Name = "Thriller"
-                        },
-                        new
-                        {
-                            Id = new Guid("cc01bbbb-6666-4a55-eeff-223344556677"),
-                            Name = "Comédie-Dramatique"
-                        },
-                        new
-                        {
-                            Id = new Guid("dd12cccc-7777-4b66-ff00-334455667788"),
-                            Name = "Animation"
-                        },
-                        new
-                        {
-                            Id = new Guid("ee23dddd-8888-4c77-aa11-445566778899"),
-                            Name = "Horreur"
-                        });
                 });
 
             modelBuilder.Entity("AspCoreFirstApp.Models.Movie", b =>
@@ -138,16 +84,6 @@ namespace AspCoreFirstApp.Migrations
                     b.HasIndex("GenreId");
 
                     b.ToTable("Movies");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateAjoutMovie = new DateTime(2024, 1, 15, 14, 20, 0, 0, DateTimeKind.Unspecified),
-                            GenreId = new Guid("a1b2c3d4-e5f6-4a11-98ef-2345abcd1111"),
-                            ImageFile = "dark_knight.jpg",
-                            Name = "The Dark Knight"
-                        });
                 });
 
             modelBuilder.Entity("AspCoreFirstApp.Models.Movie", b =>

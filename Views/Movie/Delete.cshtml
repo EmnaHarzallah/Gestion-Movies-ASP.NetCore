@@ -34,17 +34,18 @@
                         Êtes-vous sûr de vouloir supprimer ce film ? Cette action ne peut pas être annulée.
                     </p>
 
-                    <form method="post" action="@Url.Action("DeleteConfirmed", "Movie")" style="display:inline;">
+                    <form method="post" asp-action="Delete" asp-controller="Movie" style="display:inline;">
                         <input type="hidden" name="id" value="@Model.Id" />
                         <div class="d-flex gap-2">
                             <button type="submit" class="btn btn-danger">
                                 <i class="bi bi-trash"></i> Supprimer définitivement
                             </button>
-                            <a href="@Url.Action("Index", "Movie")" class="btn btn-secondary">
+                            <a asp-action="Index" asp-controller="Movie" class="btn btn-secondary">
                                 <i class="bi bi-arrow-left"></i> Annuler
                             </a>
                         </div>
                     </form>
+
                 </div>
             </div>
 
@@ -57,10 +58,10 @@
                     <dl class="row">
                         <dt class="col-sm-4">ID :</dt>
                         <dd class="col-sm-8">@Model.Id</dd>
-                        
+
                         <dt class="col-sm-4">Nom :</dt>
                         <dd class="col-sm-8">@Model.Name</dd>
-                        
+
                         @if (Model.Genre != null)
                         {
                             <dt class="col-sm-4">Genre :</dt>

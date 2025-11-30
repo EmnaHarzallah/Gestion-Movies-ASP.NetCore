@@ -11,9 +11,11 @@ using AspCoreFirstApp.Helpers;
 public class MovieController : Controller
 {
     private readonly ApplicationdbContext _db;
-    public MovieController(ApplicationdbContext db)
+    private readonly IWebHostEnvironment _webHostEnvironment;
+    public MovieController(ApplicationdbContext db, IWebHostEnvironment webHostEnvironment)
     {
         _db = db;
+        _webHostEnvironment = webHostEnvironment;
     }
 
     public IActionResult Index(int page = 1, string sortBy = "Id", string sortOrder = "asc", int pageSize = 10)
@@ -56,16 +58,50 @@ public class MovieController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Create(Movie movie)
+    public IActionResult Create(MovieVM model)
     {
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
-            _db.Movies.Add(movie);
-            _db.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            ViewBag.Errors = ModelState.Values
+                .SelectMany(v => v.Errors)
+                .Select(e => e.ErrorMessage)
+                .ToList();
+            return View(model);
         }
-        ViewBag.Genres = _db.Genres.ToList();
-        return View(movie);
+
+        var photo = model.photo;
+        if (photo == null || photo.Length == 0)
+        {
+            ModelState.AddModelError("", "Fichier non envoyé.");
+            ViewBag.Errors = ModelState.Values
+                .SelectMany(v => v.Errors)
+                .Select(e => e.ErrorMessage)
+                .ToList();
+            return View(model);
+        }
+
+        var uploads = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+        if (!Directory.Exists(uploads)) Directory.CreateDirectory(uploads);
+
+        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(photo.FileName);
+        var filePath = Path.Combine(uploads, fileName);
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            photo.CopyTo(stream);
+        }
+
+        var movie = new Movie
+        {
+            Id = model.movie.Id,
+            Name = model.movie.Name,
+            DateAjoutMovie = model.movie.DateAjoutMovie ?? DateTime.UtcNow,
+            ImageFile = fileName
+        };
+
+        _db.Movies.Add(movie);
+        _db.SaveChanges();
+
+        return RedirectToAction(nameof(Index));
     }
 
     public IActionResult Details(int id)
@@ -122,7 +158,9 @@ public class MovieController : Controller
 
     public IActionResult Delete(int id)
     {
-        var movie = _db.Movies.FirstOrDefault(m => m.Id == id);
+        var movie = _db.Movies.Include(m => m.Genre).FirstOrDefault(m => m.Id == id);
+        if (movie == null)
+            return NotFound();
         return View(movie);
     }
 
@@ -131,8 +169,11 @@ public class MovieController : Controller
     public IActionResult DeleteConfirmed(int id)
     {
         var movie = _db.Movies.Find(id);
-        _db.Movies.Remove(movie);
-        _db.SaveChanges();
+        if (movie != null)
+        {
+            _db.Movies.Remove(movie);
+            _db.SaveChanges();
+        }
         return RedirectToAction(nameof(Index));
     }
 }
