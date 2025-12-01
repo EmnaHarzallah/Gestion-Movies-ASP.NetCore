@@ -17,7 +17,7 @@ namespace AspCoreFirstApp.Models
         {
             base.OnModelCreating(modelBuilder);
 
-            // Charger Genres -------------------------------------
+    
             var genrePath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "Genre.json");
             if (File.Exists(genrePath))
             {
@@ -28,7 +28,6 @@ namespace AspCoreFirstApp.Models
                     modelBuilder.Entity<Genre>().HasData(genres);
             }
 
-            // Charger Movies -------------------------------------
             var moviePath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "Movie.json");
             if (File.Exists(moviePath))
             {

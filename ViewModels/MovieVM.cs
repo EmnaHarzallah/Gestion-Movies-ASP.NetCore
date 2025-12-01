@@ -4,7 +4,12 @@ namespace AspCoreFirstApp.ViewModels
     using Microsoft.AspNetCore.Http;
     public class MovieVM
     {
-        public Movie movie { get; set; }
+        public required Movie movie { get; set; }
         public IFormFile? photo { get; set; }
+
+        public MovieVM()
+        {
+            movie = new Movie();
+        }
     }
 }

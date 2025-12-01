@@ -19,6 +19,7 @@
         </div>
     </div>
 
+    ```
     <!-- Search and Filter Bar -->
     <div class="row mb-3">
         <div class="col-md-8">
@@ -39,7 +40,8 @@
                     @foreach (var genre in Model.Genres)
                     {
                         <option value="@genre.Id" selected="@(Context.Request.Query["genre"] == genre.Id.ToString())">
-                            @genre.Name</option>
+                            @genre.Name
+                        </option>
                     }
                 </select>
             }
@@ -48,11 +50,12 @@
 
     @if (Model.Items.Any())
     {
-        <div class="table-responsive">
+        <div class="table-responsive position-relative">
             <table class="table table-striped table-hover align-middle">
                 <thead class="table-dark">
                     <tr>
-                        <th scope="col" class="col-4">
+                        <th scope="col" style="width: 150px;">Affiche</th>
+                        <th scope="col">
                             <a href="@Url.Action("Index", "Movie", new { sortBy = "Name", sortOrder = Model.SortOrder == "asc" && Model.SortBy == "Name" ? "desc" : "asc", search = Context.Request.Query["search"], genre = Context.Request.Query["genre"] })"
                                 class="text-white text-decoration-none"
                                 title="Trier par nom @(Model.SortOrder == "asc" && Model.SortBy == "Name" ? "décroissant" : "croissant")"
@@ -65,16 +68,24 @@
                                 }
                             </a>
                         </th>
-                        <th scope="col" class="col-4">Genre</th>
-                        <th scope="col" class="col-4 text-center">Actions</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col" class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var movie in Model.Items)
                     {
                         <tr>
+                            <!-- Affiche column -->
+                            <td>
+                                <img src="@Url.Content("~/images/" + movie.ImageFile)" alt="@movie.Name"
+                                    style="width: 120px; height: 180px; object-fit: cover;" />
+                            </td>
+                            <!-- Name column -->
                             <td class="fw-semibold">@movie.Name</td>
+                            <!-- Genre column -->
                             <td>@(movie.Genre?.Name ?? "Non défini")</td>
+                            <!-- Actions column -->
                             <td class="text-center">
                                 <div class="btn-group" role="group" aria-label="Actions pour @movie.Name">
                                     <a href="@Url.Action("Details", "Movie", new { id = movie.Id })" class="btn btn-sm btn-info"
@@ -106,13 +117,17 @@
         <div class="alert alert-info text-center" role="alert">
             <i class="bi bi-info-circle fs-1 mb-2" aria-hidden="true"></i>
             <h4 class="alert-heading">Aucun film disponible</h4>
-            <p>Il n'y a pas de films correspondant à votre recherche. Essayez de modifier vos filtres ou <a
-                    href="@Url.Action("Create", "Movie")" class="alert-link">ajoutez-en un nouveau</a>.</p>
+            <p>Il n'y a pas de films correspondant à votre recherche. Essayez de modifier vos filtres ou
+                <a href="@Url.Action("Create", "Movie")" class="alert-link">ajoutez-en un nouveau</a>.
+            </p>
         </div>
     }
+    ```
+
 </div>
 
-<!-- Delete Confirmation Modal (Add to _Layout or as a partial) -->
+<!-- Delete Confirmation Modal -->
+
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -159,7 +174,6 @@
         margin-right: 0;
     }
 
-    /* Loading state for better UX */
     .table-responsive::before {
         content: "";
         position: absolute;
@@ -178,20 +192,17 @@
 </style>
 
 <script>
-    // Initialize tooltips
     document.addEventListener('DOMContentLoaded', function () {
+        // Tooltips
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl);
-        });
+        tooltipTriggerList.map(function (tooltipTriggerEl) { return new bootstrap.Tooltip(tooltipTriggerEl); });
 
-        // Handle delete modal
+        // Delete modal
         var deleteModal = document.getElementById('deleteModal');
         deleteModal.addEventListener('show.bs.modal', function (event) {
             var button = event.relatedTarget;
             var movieName = button.getAttribute('data-movie-name');
             var movieId = button.getAttribute('data-movie-id');
-            var modalTitle = deleteModal.querySelector('.modal-title');
             var modalBody = deleteModal.querySelector('.modal-body #movieName');
             var deleteLink = deleteModal.querySelector('#deleteLink');
 

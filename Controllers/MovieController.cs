@@ -20,10 +20,9 @@ public class MovieController : Controller
 
     public IActionResult Index(int page = 1, string sortBy = "Id", string sortOrder = "asc", int pageSize = 10)
     {
-        // Récupérer tous les films avec leurs genres
+    
         var query = _db.Movies.Include(m => m.Genre).AsQueryable();
 
-        // Appliquer le tri
         query = sortBy.ToLower() switch
         {
             "name" => sortOrder == "desc" ? query.OrderByDescending(m => m.Name) : query.OrderBy(m => m.Name),
@@ -31,16 +30,15 @@ public class MovieController : Controller
             _ => query.OrderBy(m => m.Id)
         };
 
-        // Total avant pagination
+      
         int totalCount = query.Count();
 
-        // Appliquer la pagination
+    
         var paginatedMovies = query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
-        // Créer le helper de pagination
         var pagination = new PaginationHelper(totalCount, page, pageSize);
 
-        // Créer et retourner le ViewModel paginé
+
         var viewModel = new PaginatedListViewModel<Movie>(paginatedMovies, pagination, sortBy, sortOrder);
         return View(viewModel);
     }

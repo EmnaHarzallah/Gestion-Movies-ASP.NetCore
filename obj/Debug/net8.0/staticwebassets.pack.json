@@ -13,6 +13,14 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\ADMIN\\AspCoreFirstApp\\wwwroot\\images\\dark_night.webp",
+      "PackagePath": "staticwebassets\\images\\dark_night.webp"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\AspCoreFirstApp\\wwwroot\\images\\inside-out.webp",
+      "PackagePath": "staticwebassets\\images\\inside-out.webp"
+    },
+    {
       "Id": "C:\\Users\\ADMIN\\AspCoreFirstApp\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

@@ -3,7 +3,14 @@
     "Id": 1,
     "Name": "The Dark Knight",
     "GenreId": "a1b2c3d4-e5f6-4a11-98ef-2345abcd1111",
-    "ImageFile": "dark_knight.jpg",
+    "ImageFile": "dark_night.webp",
+    "DateAjoutMovie": "2024-01-15T14:20:00"
+  },
+  {
+    "Id": 2,
+    "Name": "Inside Out",
+    "GenreId": "dd12cccc-7777-4b66-ff00-334455667788",
+    "ImageFile": "inside-out.webp",
     "DateAjoutMovie": "2024-01-15T14:20:00"
   }
 ]
