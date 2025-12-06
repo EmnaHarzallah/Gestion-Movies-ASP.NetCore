@@ -13,9 +13,10 @@ public class HomeController : Controller
         _logger = logger;
     }
 
+    // Page d'accueil : simple menu
     public IActionResult Index()
     {
-        return RedirectToAction("Index", "Movie");
+        return View();
     }
 
     public IActionResult Privacy()
