@@ -10,7 +10,9 @@
 
     <div class="form-group">
         <label asp-for="MembershipName"></label>
-        <input asp-for="MembershipName" class="form-control" />
+        <select asp-for="MembershipName" class="form-control" asp-items="@(new SelectList(ViewBag.Memberships))">
+            <option value="">-- Sélectionnez --</option>
+        </select>
     </div>
 
     <div class="form-group">

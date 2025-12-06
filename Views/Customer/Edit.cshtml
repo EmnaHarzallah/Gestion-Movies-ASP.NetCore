@@ -1,0 +1,32 @@
+@model AspCoreFirstApp.Models.Customer
+
+@{
+    ViewData["Title"] = "Modifier Customer";
+}
+
+<h2>Modifier Customer</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MembershipName"></label>
+        <select asp-for="MembershipName" class="form-control"
+            asp-items="@(new SelectList(new List<string> { "Bronze", "Silver", "Gold" }, Model.MembershipName))">
+            <option value="">-- Sélectionnez --</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DiscountRate"></label>
+        <input asp-for="DiscountRate" class="form-control" type="number" step="0.01" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+    <a asp-action="Index" class="btn btn-secondary">Annuler</a>
+</form>

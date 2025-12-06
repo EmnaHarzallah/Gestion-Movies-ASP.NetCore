@@ -33,6 +33,7 @@ namespace AspCoreFirstApp.Controllers
 
         public IActionResult Create()
         {
+            ViewBag.Memberships = new List<string> { "Bronze", "Silver", "Gold" };
             return View();
         }
 

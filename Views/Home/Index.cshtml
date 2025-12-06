@@ -2,14 +2,53 @@
     ViewData["Title"] = "Accueil";
 }
 
-<h1>Bienvenue sur l'application MovieApp</h1>
+<h1 class="mb-4 text-center">Bienvenue sur MovieApp</h1>
 
-<p>Choisissez une section :</p>
+<p class="text-center mb-5">Choisissez une section :</p>
 
-<ul>
-    <li><a asp-controller="Customer" asp-action="Index">Voir les Customers</a></li>
-    <li><a asp-controller="Customer" asp-action="Create">Ajouter un Customer</a></li>
-    <li><a asp-controller="Movie" asp-action="Index">Voir les Films</a></li>
-    <li><a asp-controller="Movie" asp-action="Create">Ajouter un Film</a></li>
-    <li><a asp-controller="Genre" asp-action="Index">Voir les Genres</a></li>
-</ul>
+<div class="container">
+    <div class="row g-4 justify-content-center">
+
+        <!-- Customers -->
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Customers</h5>
+                    <p class="card-text">Gérez vos clients et leurs abonnements.</p>
+                    <div class="d-flex justify-content-center flex-wrap gap-2">
+                        <a asp-controller="Customer" asp-action="Index" class="btn btn-primary me-2">Voir les
+                            Customers</a>
+                        <a asp-controller="Customer" asp-action="Create" class="btn btn-success">Ajouter un
+                            Customer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Movies -->
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Films</h5>
+                    <p class="card-text">Consultez et ajoutez des films dans votre catalogue.</p>
+                    <div class="d-flex justify-content-center flex-wrap gap-2">
+                        <a asp-controller="Movie" asp-action="Index" class="btn btn-primary me-2">Voir les Films</a>
+                        <a asp-controller="Movie" asp-action="Create" class="btn btn-success">Ajouter un Film</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Genres -->
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Genres</h5>
+                    <p class="card-text">Consultez les genres disponibles dans votre application.</p>
+                    <a asp-controller="Genre" asp-action="Index" class="btn btn-primary">Voir les Genres</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

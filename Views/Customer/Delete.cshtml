@@ -1,0 +1,35 @@
+@model AspCoreFirstApp.Models.Customer
+
+@{
+    ViewData["Title"] = "Supprimer Customer";
+}
+
+<h2>Supprimer Customer</h2>
+
+<div class="alert alert-danger">
+    <p>Êtes-vous sûr de vouloir supprimer ce customer ?</p>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">ID</dt>
+            <dd class="col-sm-9">@Model.Id</dd>
+
+            <dt class="col-sm-3">Nom</dt>
+            <dd class="col-sm-9">@Model.Name</dd>
+
+            <dt class="col-sm-3">Type d'abonnement</dt>
+            <dd class="col-sm-9">@Model.MembershipName</dd>
+
+            <dt class="col-sm-3">Taux de remise (%)</dt>
+            <dd class="col-sm-9">@Model.DiscountRate</dd>
+        </dl>
+
+        <form asp-action="Delete" method="post">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+            <a asp-action="Index" class="btn btn-secondary">Annuler</a>
+        </form>
+    </div>
+</div>

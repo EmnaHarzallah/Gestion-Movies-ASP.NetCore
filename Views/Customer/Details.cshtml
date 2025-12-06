@@ -1,0 +1,30 @@
+@model AspCoreFirstApp.Models.Customer
+
+@{
+    ViewData["Title"] = "Détails du Customer";
+}
+
+<h2>Détails du Customer</h2>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">ID</dt>
+            <dd class="col-sm-9">@Model.Id</dd>
+
+            <dt class="col-sm-3">Nom</dt>
+            <dd class="col-sm-9">@Model.Name</dd>
+
+            <dt class="col-sm-3">Type d'abonnement</dt>
+            <dd class="col-sm-9">@Model.MembershipName</dd>
+
+            <dt class="col-sm-3">Taux de remise (%)</dt>
+            <dd class="col-sm-9">@Model.DiscountRate</dd>
+        </dl>
+
+        <div class="mt-3">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Modifier</a>
+            <a asp-action="Index" class="btn btn-secondary">Retour à la liste</a>
+        </div>
+    </div>
+</div>
