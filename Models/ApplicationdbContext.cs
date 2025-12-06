@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using System.IO;
+using System.Text.Json;
 
 namespace AspCoreFirstApp.Models
 {
@@ -17,27 +19,36 @@ namespace AspCoreFirstApp.Models
         {
             base.OnModelCreating(modelBuilder);
 
-    
-            var genrePath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "Genre.json");
-            if (File.Exists(genrePath))
-            {
-                var genreJson = File.ReadAllText(genrePath);
-                var genres = System.Text.Json.JsonSerializer.Deserialize<List<Genre>>(genreJson);
 
-                if (genres != null)
-                    modelBuilder.Entity<Genre>().HasData(genres);
-            }
-
-            var moviePath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "Movie.json");
-            if (File.Exists(moviePath))
-            {
-                var movieJson = File.ReadAllText(moviePath);
-                var movies = System.Text.Json.JsonSerializer.Deserialize<List<Movie>>(movieJson);
-
-                if (movies != null)
-                    modelBuilder.Entity<Movie>().HasData(movies);
-            }
         }
 
+        public void SeedFromJson()
+        {
+
+            var genrePath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "Genre.json");
+            if (File.Exists(genrePath) && !Genres.Any())
+            {
+                var genreJson = File.ReadAllText(genrePath);
+                var genres = JsonSerializer.Deserialize<List<Genre>>(genreJson);
+                if (genres != null)
+                {
+                    Genres.AddRange(genres);
+                    SaveChanges();
+                }
+            }
+
+
+            var moviePath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "Movie.json");
+            if (File.Exists(moviePath) && !Movies.Any())
+            {
+                var movieJson = File.ReadAllText(moviePath);
+                var movies = JsonSerializer.Deserialize<List<Movie>>(movieJson);
+                if (movies != null)
+                {
+                    Movies.AddRange(movies);
+                    SaveChanges();
+                }
+            }
+        }
     }
 }
