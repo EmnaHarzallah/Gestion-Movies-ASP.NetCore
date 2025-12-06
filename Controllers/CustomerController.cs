@@ -4,11 +4,11 @@ using AspCoreFirstApp.Models;
 
 namespace AspCoreFirstApp.Controllers
 {
-    public class CustomersController : Controller
+    public class CustomerController : Controller
     {
         private readonly ApplicationdbContext _context;
 
-        public CustomersController(ApplicationdbContext context)
+        public CustomerController(ApplicationdbContext context)
         {
             _context = context;
         }
